@@ -1,9 +1,5 @@
 package main
 
-import (
-	"fmt"
-)
-
 func main() {
 
 	glsvt, err := GitLatestTag()
@@ -11,5 +7,14 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println(glsvt)
+	glsvt.Increment()
+
+	if err = GitTag(glsvt); err != nil {
+		panic(err)
+	}
+
+	if err = GitPushOrigin(glsvt); err != nil {
+		panic(err)
+	}
+
 }
